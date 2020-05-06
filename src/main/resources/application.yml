@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: org.sqlite.JDBC
+      url: jdbc:sqlite::resource:static/CQTunnel.db
+      username:
+      password:
+
+server:
+  port: 8844
+
+
+logging:
+  level:
+    com.topplus.search: debug
+  path: logs/
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
