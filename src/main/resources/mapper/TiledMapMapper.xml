@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.topplus.search.dao.TiledMapMapper">
+
+    <resultMap type="com.topplus.search.entity.TiledMapEntity" id="TiledMapMap">
+        <result property="tileimage_id" column="tileimage_id" jdbcType="OTHER"/>
+        <result property="tpath" column="tPath" jdbcType="OTHER"/>
+        <result property="vimpath" column="vImPath" jdbcType="OTHER"/>
+        <result property="iimpath" column="iImPath" jdbcType="OTHER"/>
+        <result property="dimpath" column="dImPath" jdbcType="OTHER"/>
+        <result property="mileage" column="Mileage" jdbcType="INTEGER"/>
+        <result property="preset" column="Preset" jdbcType="INTEGER"/>
+        <result property="angle" column="Angle" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TiledMapMap">
+        select
+          tId, tPath, vImPath, iImPath, dImPath, Mileage, Preset, Angle
+        from main.TiledMap
+        where tId = #{tid}
+    </select>
+
+
+    <!--瓦片图请求-->
+    <select id="selectMileage" resultMap="TiledMapMap" parameterType="com.topplus.search.entity.vo.TileImageParamVo">
+        select
+          tId as tileimage_id, tPath, vImPath, iImPath, dImPath, Mileage, Preset, Angle
+        from main.TiledMap
+        <where>
+           1=1
+           and Mileage between  #{mileageStart} and #{mileageEnd}
+        </where>
+        order by Mileage asc
+    </select>
+    <!--渗水瓦片图 -->
+    <select id="selectTileImageSeep" resultType="com.topplus.search.entity.WaterLeakEntity">
+        select
+        TiledMap.tId as tileimage_id, tPath, vImPath, iImPath, dImPath, Mileage, Preset, Angle,VPoint,IRPoint,WaterLeak.tId as speed_id
+        from main.TiledMap  LEFT JOIN main.WaterLeak  ON TiledMap.tId = WaterLeak.tId
+        <where>
+            1=1
+            and Mileage between  #{mileageStart} and #{mileageEnd}
+        </where>
+
+    </select>
+    <!--瓦片事件-->
+    <select id="selectSeep" resultType="com.topplus.search.entity.WaterLeakEntity">
+        select
+        TiledMap.tId as tileimage_id, DetId as speed_id, vImPath,  IRBRect, VRect, IRPoint, VPoint, area
+        from main.TiledMap  LEFT JOIN main.WaterLeak  ON TiledMap.tId = WaterLeak.tId
+        <where>
+            1=1
+            and Mileage between  #{mileageStart} and #{mileageEnd}
+        </where>
+    </select>
+    <!--裂缝瓦片图-->
+    <select id="selectTileImageCrack" resultType="com.topplus.search.entity.WallCrackEntity">
+        select
+        *
+        from main.TiledMap  LEFT JOIN main.WallCrack  ON TiledMap.tId = WallCrack.tId
+        <where>
+            1=1
+            and Mileage between  #{mileageStart} and #{mileageEnd}
+        </where>
+    </select>
+    <!--裂缝事件-->
+    <select id="selectCrack" resultType="com.topplus.search.entity.WallCrackEntity">
+        select
+        *
+        from main.TiledMap  LEFT JOIN main.WallCrack  ON TiledMap.tId = WallCrack.tId
+        <where>
+            1=1
+            and Mileage between  #{mileageStart} and #{mileageEnd}
+        </where>
+    </select>
+
+
+</mapper>
