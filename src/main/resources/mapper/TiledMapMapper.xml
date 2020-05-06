@@ -44,7 +44,7 @@
         </where>
 
     </select>
-    <!--瓦片事件-->
+    <!--渗水事件-->
     <select id="selectSeep" resultType="com.topplus.search.entity.WaterLeakEntity">
         select
         TiledMap.tId as tileimage_id, DetId as speed_id, vImPath,  IRBRect, VRect, IRPoint, VPoint, area
