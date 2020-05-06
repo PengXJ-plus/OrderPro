@@ -36,7 +36,7 @@
     <!--渗水瓦片图 -->
     <select id="selectTileImageSeep" resultType="com.topplus.search.entity.WaterLeakEntity">
         select
-        TiledMap.tId as tileimage_id, tPath, vImPath, iImPath, dImPath, Mileage, Preset, Angle,VPoint,IRPoint,WaterLeak.tId as speed_id
+        TiledMap.tId as tileimage_id, tPath, vImPath, iImPath, dImPath, Mileage, Preset, Angle,VPoint,IRPoint,WaterLeak.tId as speed_id,VRect
         from main.TiledMap  LEFT JOIN main.WaterLeak  ON TiledMap.tId = WaterLeak.tId
         <where>
             1=1
@@ -47,8 +47,8 @@
     <!--渗水事件-->
     <select id="selectSeep" resultType="com.topplus.search.entity.WaterLeakEntity">
         select
-        TiledMap.tId as tileimage_id, DetId as speed_id, vImPath,  IRBRect, VRect, IRPoint, VPoint, area
-        from main.TiledMap  LEFT JOIN main.WaterLeak  ON TiledMap.tId = WaterLeak.tId
+         DetId as speed_id, IRBRect, VRect, IRPoint, VPoint, area
+        from main.WaterLeak
         <where>
             1=1
             and Mileage between  #{mileageStart} and #{mileageEnd}
@@ -68,7 +68,7 @@
     <select id="selectCrack" resultType="com.topplus.search.entity.WallCrackEntity">
         select
         *
-        from main.TiledMap  LEFT JOIN main.WallCrack  ON TiledMap.tId = WallCrack.tId
+        from main.WallCrack
         <where>
             1=1
             and Mileage between  #{mileageStart} and #{mileageEnd}
