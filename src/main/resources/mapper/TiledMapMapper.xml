@@ -36,7 +36,7 @@
     <!--渗水瓦片图 -->
     <select id="selectTileImageSeep" resultType="com.topplus.search.entity.WaterLeakEntity">
         select
-        TiledMap.tId as tileimage_id, tPath, vImPath, iImPath, dImPath, Mileage, Preset, Angle,VPoint,IRPoint,WaterLeak.tId as speed_id,VRect
+        TiledMap.tId as tileimage_id, tPath, vImPath, iImPath, dImPath, Mileage, Preset, Angle,VPoint,IRPoint,VRect
         from main.TiledMap  LEFT JOIN main.WaterLeak  ON TiledMap.tId = WaterLeak.tId
         <where>
             1=1

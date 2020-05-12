@@ -1,12 +1,11 @@
 package com.topplus.search.entity.vo;
 
-import com.topplus.search.entity.TiledMapEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 /**
  * TileImageParamVo
@@ -18,7 +17,7 @@ import java.util.Map;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TileImageParamVo {
+public class TileImageParamVo implements Serializable {
 
     private Integer mileageStart;
     private Integer mileageEnd;

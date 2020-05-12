@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-04-28 17:41:17
  */
 @RestController
-@RequestMapping("test")
+@RequestMapping("api")
 @AllArgsConstructor
 public class TileImageController {
 

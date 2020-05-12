@@ -29,7 +29,7 @@ public class WaterLeakEntity {
      * 瓦片图实体
      *
      */
-    private Integer tileimage_id;
+    private String tileimage_id;
 
     private String tpath;
 

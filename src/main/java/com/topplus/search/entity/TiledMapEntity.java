@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class TiledMapEntity implements Serializable {
     private static final long serialVersionUID = 685014799935704955L;
 
-    private Integer tileimage_id;
+    private String tileimage_id;
 
     private String tpath;
 
