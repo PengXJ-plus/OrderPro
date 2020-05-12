@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.stream.Collectors;
 
 /**
@@ -32,7 +31,12 @@ public class TiledMapServiceImpl implements ITiledMapServiceService {
     public TileImageParamVo selectMileage(TileImageParamVo param) {
         param.setTime(CommonUtil.localTimeToStr());
         param.setTileImageArray(tiledMapDao.selectMileage(param).stream()
-                .peek(v -> v.setTpath(CommonUtil.byteToStringByBase64(v.getTpath())))
+                .peek(v -> {
+                    v.setTpath(CommonUtil.byteToStringByBase64(v.getTpath()));
+                    v.setVimpath(CommonUtil.replaceAll(v.getVimpath()));
+                    v.setTpath(CommonUtil.replaceAll(v.getTpath()));
+                    v.setDimpath(CommonUtil.replaceAll(v.getDimpath()));
+                })
                 .collect(Collectors.toList()));
         return param;
     }
@@ -46,7 +50,12 @@ public class TiledMapServiceImpl implements ITiledMapServiceService {
     public TileImageParamVo selectTileImageSeep(TileImageParamVo param) {
         param.setTime(CommonUtil.localTimeToStr());
         param.setTileImageArray(tiledMapDao.selectTileImageSeep(param).stream()
-                .peek(x-> x.setIimpath(CommonUtil.byteToStringByBase64(x.getIimpath())))
+                .peek(x-> {
+                    x.setIimpath(CommonUtil.byteToStringByBase64(x.getIimpath()));
+                    x.setVimpath(CommonUtil.replaceAll(x.getVimpath()));
+                    x.setTpath(CommonUtil.replaceAll(x.getTpath()));
+                    x.setDimpath(CommonUtil.replaceAll(x.getDimpath()));
+                })
                 .collect(Collectors.toList()));
         return param;
     }
@@ -73,7 +82,12 @@ public class TiledMapServiceImpl implements ITiledMapServiceService {
     public TileImageParamVo selectTileImageCrack(TileImageParamVo param) {
         param.setTime(CommonUtil.localTimeToStr());
         param.setTileImageArray(tiledMapDao.selectTileImageCrack(param).stream()
-                .peek(x-> x.setIimpath(CommonUtil.byteToStringByBase64(x.getIimpath())))
+                .peek(x-> {
+                    x.setIimpath(CommonUtil.byteToStringByBase64(x.getIimpath()));
+                    x.setVimpath(CommonUtil.replaceAll(x.getVimpath()));
+                    x.setTpath(CommonUtil.replaceAll(x.getTpath()));
+                    x.setDimpath(CommonUtil.replaceAll(x.getDimpath()));
+                })
                 .collect(Collectors.toList()));
         return null;
     }

@@ -25,6 +25,16 @@ public class CommonUtil {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
+
+    public static String replaceAll(String path){
+        String string = "\\\\";
+        if(path.contains(string)){
+            path = path.replaceAll(string,"/");
+        }
+        return path;
+    }
+
+
     /**
      * 图片转码
      *
@@ -32,6 +42,7 @@ public class CommonUtil {
      * @return base64
      */
     public static String byteToStringByBase64(String path) {
+        path = replaceAll(path);
         String encodeToString = null;
         try {
             if (Files.exists(Paths.get(path))) {
@@ -40,7 +51,6 @@ public class CommonUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return encodeToString;
+        return encodeToString == null ? path : encodeToString;
     }
-
 }
